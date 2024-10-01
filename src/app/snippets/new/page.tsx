@@ -42,6 +42,8 @@ const CreateSnippetPage = () => {
           options={{ minimap: { enabled: false } }}
           onChange={handleEditorChange}
         />
+
+        {/* Hide textarea but control value with code state to ensure server action is succcessfully using form data */}
         <textarea name="code" className=" hidden" id="code" value={code} />
       </div>
     </form>
