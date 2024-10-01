@@ -14,7 +14,12 @@ const CreateSnippetPage = () => {
   return (
     <form action={action}>
       <div className="flex justify-between items-center my-4">
-        <h3 className="font text-lg ">New Code Snippet</h3>
+        <input
+          name="title"
+          className="border rounded p-2 w-full me-5"
+          id="title"
+          placeholder="Title"
+        />
         <button
           type="submit"
           className=" rounded p-2 bg-blue-600 text-white font-bold"
@@ -22,35 +27,21 @@ const CreateSnippetPage = () => {
           Save
         </button>
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <label htmlFor="title" className="w-12">
-            Title
-          </label>
-          <input
-            name="title"
-            className="border rounded p-2 w-full"
-            id="title"
-          />
+      {formState.message ? (
+        <div className="my-4 mb-6 p-2 bg-red-50 rounded border border-red-500 text-red-800 font-bold shadow">
+          {formState.message}
         </div>
-        <div className="flex gap-4">
-          <label htmlFor="code" className="w-12">
-            Code
-          </label>
-          <Editor
-            height="50vh"
-            language="javascript"
-            theme="vs-dark"
-            defaultValue={code}
-            options={{ minimap: { enabled: false } }}
-            onChange={handleEditorChange}
-          />
-        </div>
-        {formState.message ? (
-          <div className="my-2 p-2 bg-red-50 rounded border border-red-500 text-red-800 font-bold">
-            {formState.message}
-          </div>
-        ) : null}
+      ) : null}
+
+      <div className="rounded overflow-hidden">
+        <Editor
+          height="50vh"
+          language="javascript"
+          theme="vs-dark"
+          defaultValue={code}
+          options={{ minimap: { enabled: false } }}
+          onChange={handleEditorChange}
+        />
       </div>
     </form>
   );
