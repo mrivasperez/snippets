@@ -13,7 +13,20 @@ const ShowSnippetPage = async (props: ShowSnippetPageProps) => {
 
   if (!snippet) return notFound();
 
-  return <div>{snippet.title}</div>;
+  return (
+    <div>
+      <div className="flex my-4 justify-between items-center">
+        <h1 className="text-3xl">{snippet.title}</h1>
+        <div className="flex gap-4">
+          <button className="p-2 border rounded">Edit</button>
+          <button className="p-2 border rounded">Delete</button>
+        </div>
+      </div>
+      <pre className="p-2 border rounded bg-gray-50 border-gray-200">
+        <code>{snippet.code}</code>
+      </pre>
+    </div>
+  );
 };
 
 export default ShowSnippetPage;
