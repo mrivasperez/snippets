@@ -18,15 +18,8 @@ const Home = async () => {
   });
 
   return (
-    <div>
-      <div className="flex justify-between items-center my-4">
-        <h1 className="text-3xl">Snippets</h1>
-        <Link href={"/snippets/new"} className="border p-2 rounded">
-          <i className="bi bi-plus"></i> New
-        </Link>
-      </div>
-
-      <div className="flex gap-2 flex-col">{renderedSnippets}</div>
+    <div className="flex gap-2 flex-col my-4">
+      {snippets.length > 0 ? renderedSnippets : "Welcome"}
     </div>
   );
 };
