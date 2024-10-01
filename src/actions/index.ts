@@ -7,7 +7,6 @@ export const createSnippet = async (
   formState: { message: string },
   formData: FormData
 ) => {
-  "use server";
   const title = formData.get("title");
   const code = formData.get("code");
 
@@ -21,11 +20,9 @@ export const createSnippet = async (
   if (code.length < 10) return { message: "Code must be longer." };
 
   // create new db record
-  const newSnippet = await db.snippet.create({
+  await db.snippet.create({
     data: { title, code }
   });
-
-  console.log(newSnippet); // TODO
 
   redirect("/");
 };
