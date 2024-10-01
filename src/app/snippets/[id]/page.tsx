@@ -1,4 +1,5 @@
 import { db } from "@/db";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -18,8 +19,15 @@ const ShowSnippetPage = async (props: ShowSnippetPageProps) => {
       <div className="flex my-4 justify-between items-center">
         <h1 className="text-3xl">{snippet.title}</h1>
         <div className="flex gap-4">
-          <button className="p-2 border rounded">Edit</button>
-          <button className="p-2 border rounded">Delete</button>
+          <Link
+            href={`/snippets/${snippet.id}/edit`}
+            className="p-2 border rounded"
+          >
+            Edit
+          </Link>
+          <Link href="" className="p-2 border rounded">
+            Delete
+          </Link>
         </div>
       </div>
       <pre className="p-2 border rounded bg-gray-50 border-gray-200">
