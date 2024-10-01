@@ -21,7 +21,7 @@ const EditSnippetForm = ({ snippet }: EditSnippetFormProps) => {
   return (
     <div>
       <Editor
-        height="40vh"
+        height="50vh"
         language="javascript"
         theme="vs-dark"
         defaultValue={code}

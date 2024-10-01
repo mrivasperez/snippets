@@ -1,15 +1,27 @@
 "use client";
 
 import { createSnippet } from "@/actions";
-import React from "react";
+import { Editor } from "@monaco-editor/react";
+import React, { useState } from "react";
 import { useFormState } from "react-dom";
 
 const CreateSnippetPage = () => {
   const [formState, action] = useFormState(createSnippet, { message: "" });
+  const [code, setCode] = useState("");
+
+  const handleEditorChange = (value: string = "") => setCode(value);
 
   return (
     <form action={action}>
-      <h3 className="font text-lg my-4">New Code Snippet</h3>
+      <div className="flex justify-between items-center my-4">
+        <h3 className="font text-lg ">New Code Snippet</h3>
+        <button
+          type="submit"
+          className=" rounded p-2 bg-blue-600 text-white font-bold"
+        >
+          Save
+        </button>
+      </div>
       <div className="flex flex-col gap-4">
         <div className="flex gap-4">
           <label htmlFor="title" className="w-12">
@@ -25,10 +37,13 @@ const CreateSnippetPage = () => {
           <label htmlFor="code" className="w-12">
             Code
           </label>
-          <textarea
-            name="code"
-            className="border rounded p-2 w-full"
-            id="code"
+          <Editor
+            height="50vh"
+            language="javascript"
+            theme="vs-dark"
+            defaultValue={code}
+            options={{ minimap: { enabled: false } }}
+            onChange={handleEditorChange}
           />
         </div>
         {formState.message ? (
@@ -36,9 +51,6 @@ const CreateSnippetPage = () => {
             {formState.message}
           </div>
         ) : null}
-        <button type="submit" className=" rounded p-2 bg-blue-200">
-          Create
-        </button>
       </div>
     </form>
   );
