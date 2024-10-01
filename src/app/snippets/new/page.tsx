@@ -1,44 +1,50 @@
 "use client";
 
 import { createSnippet } from "@/actions";
-import React from "react";
+import { Editor } from "@monaco-editor/react";
+import React, { useState } from "react";
 import { useFormState } from "react-dom";
 
 const CreateSnippetPage = () => {
   const [formState, action] = useFormState(createSnippet, { message: "" });
+  const [code, setCode] = useState("");
+
+  const handleEditorChange = (value: string = "") => setCode(value);
 
   return (
     <form action={action}>
-      <h3 className="font-bold my-10">Create a Code Snippet</h3>
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <label htmlFor="title" className="w-12">
-            Title
-          </label>
-          <input
-            name="title"
-            className="border rounded p-2 w-full"
-            id="title"
-          />
-        </div>
-        <div className="flex gap-4">
-          <label htmlFor="code" className="w-12">
-            Code
-          </label>
-          <textarea
-            name="code"
-            className="border rounded p-2 w-full"
-            id="code"
-          />
-        </div>
-        {formState.message ? (
-          <div className="my-2 p-2 bg-red-50 rounded border border-red-500 text-red-800 font-bold">
-            {formState.message}
-          </div>
-        ) : null}
-        <button type="submit" className=" rounded p-2 bg-blue-200">
-          Create
+      <div className="flex justify-between items-center my-4">
+        <input
+          name="title"
+          className="border rounded p-2 w-full me-5"
+          id="title"
+          placeholder="Title"
+        />
+        <button
+          type="submit"
+          className=" rounded p-2 bg-blue-600 text-white font-bold"
+        >
+          Save
         </button>
+      </div>
+      {formState.message ? (
+        <div className="my-4 mb-6 p-2 bg-red-50 rounded border border-red-500 text-red-800 font-bold shadow">
+          {formState.message}
+        </div>
+      ) : null}
+
+      <div className="rounded overflow-hidden">
+        <Editor
+          height="50vh"
+          language="javascript"
+          theme="vs-dark"
+          defaultValue={code}
+          options={{ minimap: { enabled: false } }}
+          onChange={handleEditorChange}
+        />
+
+        {/* Hide textarea but control value with code state to ensure server action is succcessfully using form data */}
+        <textarea name="code" className=" hidden" id="code" value={code} />
       </div>
     </form>
   );

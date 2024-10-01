@@ -1,4 +1,5 @@
 import { deleteSnippet } from "@/actions";
+import Code from "@/components/Code";
 import { db } from "@/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -26,16 +27,16 @@ const ShowSnippetPage = async (props: ShowSnippetPageProps) => {
             href={`/snippets/${snippet.id}/edit`}
             className="p-2 border rounded"
           >
-            Edit
+            <i className="bi bi-pencil-square me-2"></i>Edit
           </Link>
           <form action={deleteSnippetAction}>
-            <button className="p-2 border rounded">Delete</button>
+            <button className="p-2 border rounded">
+              <i className="bi bi-trash me-2"></i>Delete
+            </button>
           </form>
         </div>
       </div>
-      <pre className="p-2 border rounded bg-gray-50 border-gray-200">
-        <code>{snippet.code}</code>
-      </pre>
+      <Code code={snippet.code} />
     </div>
   );
 };
