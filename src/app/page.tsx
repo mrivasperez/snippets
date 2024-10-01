@@ -22,7 +22,7 @@ const Home = async () => {
       <div className="flex justify-between items-center my-4">
         <h1 className="text-3xl">Snippets</h1>
         <Link href={"/snippets/new"} className="border p-2 rounded">
-          New
+          <i className="bi bi-plus"></i> New
         </Link>
       </div>
 

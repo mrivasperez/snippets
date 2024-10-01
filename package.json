@@ -11,6 +11,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
     "@prisma/client": "^5.20.0",
+    "bootstrap-icons": "^1.11.3",
     "next": "14.2.13",
     "prisma": "^5.20.0",
     "react": "^18",
